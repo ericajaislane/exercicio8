@@ -1,0 +1,45 @@
+#include <stdio.h>
+
+// Definindo a estrutura para armazenar uma data
+typedef struct {
+    int dia;
+    int mes;
+    int ano;
+} data_t;
+
+// Função auxiliar para calcular o número de dias desde 01/01/0001
+int dias_desde_inicio(data_t data) {
+    // Aproximadamente, assumindo que cada mês tem 30 dias e que um ano tem 365 dias (desconsiderando anos bissextos)
+    return data.ano * 365 + data.mes * 30 + data.dia;
+}
+
+// Função que calcula quantos dias de vida uma pessoa tem
+int dias_de_vida(data_t nasc) {
+    // Definindo a data atual para fins de teste
+    data_t hoje;
+    hoje.dia = 20;
+    hoje.mes = 10;
+    hoje.ano = 2024;
+
+    // Calcula o número de dias para cada data (nascimento e hoje)
+    int dias_nasc = dias_desde_inicio(nasc);
+    int dias_hoje = dias_desde_inicio(hoje);
+
+    // Retorna a diferença de dias entre a data atual e a data de nascimento
+    return dias_hoje - dias_nasc;
+}
+
+// Função principal para teste
+int main() {
+    data_t nascimento;
+
+    // Leitura da data de nascimento do usuário
+    printf("Digite sua data de nascimento (dia mes ano): ");
+    scanf("%d %d %d", &nascimento.dia, &nascimento.mes, &nascimento.ano);
+
+    // Calcula e imprime os dias de vida
+    int dias_vida = dias_de_vida(nascimento);
+    printf("Voce tem aproximadamente %d dias de vida.\n", dias_vida);
+
+    return 0;
+}
